@@ -1,0 +1,2 @@
+- Adicionar tabela "administrador"
+- Adicionar classe "administrador"
