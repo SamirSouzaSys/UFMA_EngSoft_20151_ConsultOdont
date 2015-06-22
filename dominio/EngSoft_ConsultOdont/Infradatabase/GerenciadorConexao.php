@@ -1,6 +1,8 @@
 <?php
 
-require_once './dominio/infradatabase/ArrayDatabaseConfig.php';
+namespace EngSoft_ConsultOdont\Infradatabase;
+
+use ArrayDatabaseConfig;
 
 /**
  * UNA-SUS/UFMA - InfraEstrutura
@@ -21,6 +23,8 @@ class GerenciadorConexao {
     private $dbConfigEmUsoTcc = 'production_tcc'; //'test_tcc' 'production_tcc' 'localSam'
 
     /* Database - Não precisa alterar */
+    private $dbLocal = 'local';
+    
     private $dbMoodle = 'moodle';
     private $dbTcc = 'bd_ambiente_tcc';
 
@@ -36,7 +40,7 @@ class GerenciadorConexao {
      * @author Samir Souza <samir.guitar@gmail.com>
      * @copyright (c) 2014, UNA-SUS/UFMA
      */
-    public function abrirConexaoDb($db, $tipoConexao = NULL) {
+    public function abrirConexaoDb($db) {
         $arrayConfigsDb = array();
         $arrayConfigsDb = ArrayDatabaseConfig::obterDatabaseConfig($arrayConfigsDb);
 
@@ -54,14 +58,14 @@ class GerenciadorConexao {
         }
 
         //DEFAULT
-        if ($tipoConexao == 'mysql' xor $tipoConexao == null) {
-            //Conexão mysql
-            $conexao = $this->abrirConexaoMySql($servidor, $usuario, $senha, $db);
-            mysql_select_db($db, $conexao);
-        } elseif ($tipoConexao == 'pdo') {
-            //Conexão PDO
+//        if ($tipoConexao == 'mysql' xor $tipoConexao == null) {
+//            //Conexão mysql
+//            $conexao = $this->abrirConexaoMySql($servidor, $usuario, $senha, $db);
+//            mysql_select_db($db, $conexao);
+//        } elseif ($tipoConexao == 'pdo') {
+//            //Conexão PDO
             $conexao = $this->abrirConexaoPDO($servidor, $usuario, $senha, $db);
-        }
+//        }
         return $conexao;
     }
 

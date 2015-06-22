@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+namespace EngSoft_ConsultOdont\Bean;
 /**
  * Description of Administrador
  *

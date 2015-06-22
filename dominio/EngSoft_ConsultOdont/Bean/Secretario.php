@@ -6,10 +6,13 @@
  * and open the template in the editor.
  */
 
+namespace EngSoft_ConsultOdont\Bean;
+
 /**
  * Description of Secretario
  *
  * @author Samir Souza <samir.guitar@gmail.com>
  */
 class Secretario extends Funcionario{
+    
 }

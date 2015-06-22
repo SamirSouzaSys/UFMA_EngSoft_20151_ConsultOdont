@@ -6,6 +6,8 @@
  * and open the template in the editor.
  */
 
+namespace EngSoft_ConsultOdont\Bean;
+
 /**
  * Description of Funcionario
  *
@@ -49,4 +51,10 @@ abstract class Funcionario {
         return $this->senha;
     }
 
+    function setId($id) {
+        $this->id = $id;
+    }
+
+
+    
 }

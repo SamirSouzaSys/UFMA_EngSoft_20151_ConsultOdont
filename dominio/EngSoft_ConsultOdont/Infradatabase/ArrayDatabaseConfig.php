@@ -9,6 +9,8 @@
  * @link http://www.unasus.ufma.br/jornadatcc/provab2015/
  */
 
+namespace EngSoft_ConsultOdont\Infradatabase;
+
 /**
  * Arquivos de configuração do banco de dados
  */
