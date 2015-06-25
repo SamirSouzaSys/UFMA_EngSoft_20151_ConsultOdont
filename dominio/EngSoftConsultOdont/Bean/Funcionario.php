@@ -6,14 +6,13 @@
  * and open the template in the editor.
  */
 
-namespace EngSoft_ConsultOdont\Bean;
-
 /**
  * Description of Funcionario
  *
  * @author Samir Souza <samir.guitar@gmail.com>
  */
 abstract class Funcionario {
+
     private $id;
     private $nome;
     private $cpf;
@@ -22,15 +21,21 @@ abstract class Funcionario {
     private $contato;
     private $matricula;
     private $senha;
-    
-    function __construct($nome, $cpf, $dataNascimento, $matricula, $senha) {
+
+    function __construct($nome, $cpf, $dataNascimento,$endereco, $contato, $matricula, $senha) {
         $this->nome = $nome;
         $this->cpf = $cpf;
         $this->dataNascimento = $dataNascimento;
+        $this->endereco = $endereco;
+        $this->contato = $contato;
         $this->matricula = $matricula;
         $this->senha = $senha;
     }
-    
+
+    private function getVars() {
+        return var_dump(getVars($this));
+    }
+
     function getId() {
         return $this->id;
     }
@@ -51,10 +56,20 @@ abstract class Funcionario {
         return $this->senha;
     }
 
+    function getDataNascimento() {
+        return $this->dataNascimento;
+    }
+
+    function getEndereco() {
+        return $this->endereco;
+    }
+
+    function getContato() {
+        return $this->contato;
+    }
+
     function setId($id) {
         $this->id = $id;
     }
 
-
-    
 }
