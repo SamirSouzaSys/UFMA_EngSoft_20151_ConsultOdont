@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 require_once 'GenericDAO.php';
-
+require_once '../Bean/Secretario.php';
 /**
  * Description of SecretarioDAO
  *
@@ -19,7 +19,7 @@ class SecretarioDAO extends GenericDAO {
         parent::__construct($tableName, $tableColumns, $camposReferencia);
     }
     
-    public function bindParamsObjInsert($stmt, $obj) {
+    function bindParamsObjInsert($stmt, $obj) {
 //    $stmt->bindParam(':moodle_id', $moodle_id, PDO::PARAM_INT);
 //    $stmt->bindParam(':operacao', $operacao, PDO::PARAM_STR);
 //    $handle->execute(array(":date"=>date("Y-m-d H:i:s", strtotime($date)), PDO::PARAM_STR));
@@ -33,15 +33,23 @@ class SecretarioDAO extends GenericDAO {
         
     }
 
-    public function getDadosObjInsert() {
+    function getDadosObjInsert() {
         return " :nomeSecret, :cpfSecret, :dataNascSecret, :enderecoSecret, :contatoSecret, :matriSecret, :senhaSecret ";
-        
     }
 
-    public function getDadosObjSelectById() {
+    function getDadosObjSelectById() {
         $a;
     }
     
+//    function montaArrayObjetos($stmt->fetch(PDO::FETCH_ASSOC),$arrayObjects){
+    function montaArrayObjetos($stmt, $arrayObjects){
+        
+        while($linha =  $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $secretario = new Secretario($linha['nome'], $linha['cpf'], $linha['dataNascimento'], $linha['endereco'], $linha['contato'], $linha['matricula'], $linha['senha']);
+            $arrayObjects[] = $secretario;
+        }
+    }
+            
     
 
 }

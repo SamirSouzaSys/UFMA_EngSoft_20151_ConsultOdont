@@ -22,7 +22,7 @@ abstract class Funcionario {
     private $matricula;
     private $senha;
 
-    function __construct($nome, $cpf, $dataNascimento,$endereco, $contato, $matricula, $senha) {
+    function __construct($nome, $cpf, $dataNascimento, $endereco, $contato, $matricula, $senha) {
         $this->nome = $nome;
         $this->cpf = $cpf;
         $this->dataNascimento = $dataNascimento;
@@ -70,6 +70,34 @@ abstract class Funcionario {
 
     function setId($id) {
         $this->id = $id;
+    }
+
+    function setNome($nome) {
+        $this->nome = $nome;
+    }
+
+    function setCpf($cpf) {
+        $this->cpf = $cpf;
+    }
+
+    function setDataNascimento($dataNascimento) {
+        $this->dataNascimento = $dataNascimento;
+    }
+
+    function setEndereco($endereco) {
+        $this->endereco = $endereco;
+    }
+
+    function setContato($contato) {
+        $this->contato = $contato;
+    }
+
+    function setMatricula($matricula) {
+        $this->matricula = $matricula;
+    }
+
+    function setSenha($senha) {
+        $this->senha = $senha;
     }
 
 }

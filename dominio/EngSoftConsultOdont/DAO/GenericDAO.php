@@ -16,10 +16,7 @@ abstract class GenericDAO {
 //    nome da tabela referente a classe
     private $tableName;
 //    Array com os 'Nome coluna' => Valor para o dataBind
-//    private $tableColumns = array("id" => "valor dataBind",);
     private $arrayTableColumns;
-//
-    private $camposReferencia;
     private $conexaoPDO;
 
     function __construct($tableName = null, $arrayTableColumns = null, $camposReferencia = null) {
@@ -32,7 +29,7 @@ abstract class GenericDAO {
         if (!isset($object)) {
             return false;
         }
-
+        
         try {
             $this->conexaoPDO = $objConexao->abrirConexaoDb('teste');
         } catch (PDOException $exc) {
@@ -73,22 +70,64 @@ abstract class GenericDAO {
 
         $objConexao->fecharConexaoDb(null, $this->conexaoPDO);
 
+        //retornar objeto com id
+        //capturar id
+        //secretarioInserido->setID
         return TRUE;
     }
 
-    private function DAOUpdate($item, GerenciadorConexao $conexao) {
+    function DAOSelectAll(GerenciadorConexao $conexao) {
+        if (!isset($object)) {
+            return false;
+        }
+        
+        try {
+            $this->conexaoPDO = $objConexao->abrirConexaoDb('teste');
+        } catch (PDOException $exc) {
+            throw new PDOException($exc->getMessage());
+        }
+        
+        $query = "select * from " . $this->tableName;
+        
+        try {
+            $stmt = new PDOStatement;
+            $stmt = $this->conexaoPDO->query($query);
+
+            $arrayObjects = array();
+            
+        //monta os objetos
+            $this->montaArrayObjetos($stmt->fetch(PDO::FETCH_ASSOC),$arrayObjects);
+            
+        } catch (PDOException $exc) {
+            $objConexao->fecharConexaoDb(null, $this->conexaoPDO);
+            throw new PDOException("Ocorreu um erro ao gerar o LOG da Inscrição.");
+        }
+        
+        $objConexao->fecharConexaoDb(null, $this->conexaoPDO);
+        
+        //retornar array de objeto(s)
+        return $arrayObjects;
+    }
+    
+    function DAOUpdate($object, GerenciadorConexao $conexao) {
+        if (!isset($object)) {
+            return false;
+        }
+        
+        try {
+            $this->conexaoPDO = $objConexao->abrirConexaoDb('teste');
+        } catch (PDOException $exc) {
+            throw new PDOException($exc->getMessage());
+        }
+        
+        
+    }
+    
+    function DAOSelectColumn($itemColumn, GerenciadorConexao $conexao) {
         $a;
     }
 
-    private function DAOSelectAll(GerenciadorConexao $conexao) {
-        $a;
-    }
-
-    private function DAOSelectColumn($itemColumn, GerenciadorConexao $conexao) {
-        $a;
-    }
-
-    private function DAODelete($item, GerenciadorConexao $conexao) {
+    function DAODelete($item, GerenciadorConexao $conexao) {
         $a;
     }
 
@@ -124,7 +163,7 @@ abstract class GenericDAO {
         $this->conexaoPDO = $conexaoPDO;
     }
 
-    //vai montar a lista de campos necessários para a operação
+//vai montar a lista de campos necessários para a operação
     abstract function getDadosObjInsert();
 
 //vai montar a lista de campos necessários para a operação
@@ -134,6 +173,8 @@ abstract class GenericDAO {
     abstract function getDadosObjSelectById();
 //    EXEMPLO
 //    $stmt->bindParam(':localHorarioJornada', $localHorarioJornada, PDO::PARAM_INT);
-//    $stmt->bindParam(':moodle_id', $moodle_id, PDO::PARAM_INT);
 //    $stmt->bindParam(':operacao', $operacao, PDO::PARAM_STR);
+
+//vai montar um array com os objetos recuperados do banco
+    abstract function montaArrayObjetos($stmt,$arrayObjects);       
 }
