@@ -12,11 +12,18 @@
  * @author Samir Souza <samir.guitar@gmail.com>
  */
 class ItemListaDeEspera {
-    
+
     private $id;
     private $id_cliente;
     private $id_secretario;
     private $data_hora;
+
+    function __construct($id, $id_cliente, $id_secretario, $data_hora) {
+        $this->id = $id;
+        $this->id_cliente = $id_cliente;
+        $this->id_secretario = $id_secretario;
+        $this->data_hora = $data_hora;
+    }
 
     function getId_cliente() {
         return $this->id_cliente;
@@ -41,6 +48,5 @@ class ItemListaDeEspera {
     function setData_hora($data_hora) {
         $this->data_hora = $data_hora;
     }
-
 
 }

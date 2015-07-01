@@ -1,4 +1,5 @@
 <?php
+
 require_once '../Bean/Secretario.php';
 require_once '../Infradatabase/GerenciadorConexao.php';
 require_once '../DAO/SecretarioDAO.php';
@@ -28,7 +29,11 @@ $secretarioArrayColumns = array(
 $secreDao->setArrayTableColumns($secretarioArrayColumns);
 
 //Teste de inserçao
-$result = $secreDao->DAOInsert($secreObj, $gerenConex); //1
-$secreDao->DAOInsert($secreObj, $gerenConex); //2
-$secreDao->DAOInsert($secreObj, $gerenConex); //3
+//$secreDao->DAOInsert($secreObj, $gerenConex); //1
+//$secreDao->DAOInsert($secreObj, $gerenConex); //1
+//$secreDao->DAOInsert($secreObj, $gerenConex); //2
+//$secreDao->DAOInsert($secreObj, $gerenConex); //3
 
+
+//Teste selectAll
+//var_dump($secreDao->DAOSelectAll($gerenConex));

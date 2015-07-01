@@ -5,12 +5,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace EngSoft_ConsultOdont\Bean;
+
+require_once 'Funcionario.php';
+
 /**
  * Description of Administrador
  *
  * @author Samir Souza <samir.guitar@gmail.com>
  */
 class Administrador extends Funcionario {
-    //put your code here
+
+    public function __construct($nome, $cpf, $dataNascimento, $endereco, $contato, $matricula, $senha) {
+        parent::__construct($nome, $cpf, $dataNascimento, $endereco, $contato, $matricula, $senha);
+    }
+
 }

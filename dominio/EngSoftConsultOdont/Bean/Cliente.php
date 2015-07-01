@@ -12,16 +12,21 @@
  * @author Samir Souza <samir.guitar@gmail.com>
  */
 class Cliente {
+
     private $id;
     private $nome;
     private $cpf;
     private $dataNascimento;
     private $endereco;
     private $contato;
-    
-    function __construct($nome, $cpf) {
+
+    function __construct($id, $nome, $cpf, $dataNascimento, $endereco, $contato) {
+        $this->id = $id;
         $this->nome = $nome;
         $this->cpf = $cpf;
+        $this->dataNascimento = $dataNascimento;
+        $this->endereco = $endereco;
+        $this->contato = $contato;
     }
 
     function getId() {
@@ -72,6 +77,4 @@ class Cliente {
         $this->contato = $contato;
     }
 
-
-    
 }

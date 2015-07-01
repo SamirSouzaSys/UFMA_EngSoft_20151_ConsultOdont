@@ -12,10 +12,18 @@
  * @author Samir Souza <samir.guitar@gmail.com>
  */
 class Procedimento {
+
     private $id;
     private $nome;
     private $descricao;
     private $preco;
+
+    function __construct($id, $nome, $descricao, $preco) {
+        $this->id = $id;
+        $this->nome = $nome;
+        $this->descricao = $descricao;
+        $this->preco = $preco;
+    }
 
     function getNome() {
         return $this->nome;
@@ -41,6 +49,4 @@ class Procedimento {
         $this->preco = $preco;
     }
 
-
-    
 }
