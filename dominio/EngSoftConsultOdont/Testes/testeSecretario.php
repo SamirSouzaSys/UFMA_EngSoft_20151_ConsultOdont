@@ -29,11 +29,10 @@ $secretarioArrayColumns = array(
 $secreDao->setArrayTableColumns($secretarioArrayColumns);
 
 //Teste de inserçao
-//$secreDao->DAOInsert($secreObj, $gerenConex); //1
-//$secreDao->DAOInsert($secreObj, $gerenConex); //1
-//$secreDao->DAOInsert($secreObj, $gerenConex); //2
-//$secreDao->DAOInsert($secreObj, $gerenConex); //3
-
+$secreDao->DAOInsert($secreObj, $gerenConex); //1
+$secreDao->DAOInsert($secreObj, $gerenConex); //1
+$secreDao->DAOInsert($secreObj, $gerenConex); //2
+$secreDao->DAOInsert($secreObj, $gerenConex); //3
 
 //Teste selectAll
-//var_dump($secreDao->DAOSelectAll($gerenConex));
+var_dump($secreDao->DAOSelectAll($gerenConex));

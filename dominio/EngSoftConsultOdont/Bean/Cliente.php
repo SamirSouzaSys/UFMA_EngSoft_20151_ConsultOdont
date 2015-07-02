@@ -20,8 +20,7 @@ class Cliente {
     private $endereco;
     private $contato;
 
-    function __construct($id, $nome, $cpf, $dataNascimento, $endereco, $contato) {
-        $this->id = $id;
+    function __construct($nome, $cpf, $dataNascimento, $endereco, $contato) {
         $this->nome = $nome;
         $this->cpf = $cpf;
         $this->dataNascimento = $dataNascimento;

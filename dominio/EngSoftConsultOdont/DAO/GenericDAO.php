@@ -38,16 +38,14 @@ abstract class GenericDAO {
 
         //LIsta de colunas da tabela que serão afetadas pela query
         $colunas = '';
-        $i = 0;
         foreach ($this->arrayTableColumns as $key => $val) {
             if ($key != 'id') {
-                if ($i > 1) {
+                if ($colunas != '') {
                     $colunas = $colunas . ', ' . $key;
                 } else {//sendo o primeiro elemento
                     $colunas = $key;
                 }
             }
-            $i++;
         }
 
         //coleta campos que serão utilizados pelo dataBind na operação atual

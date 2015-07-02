@@ -17,12 +17,29 @@ class ItemListaDeEspera {
     private $id_cliente;
     private $id_secretario;
     private $data_hora;
+    private $atendido;
 
-    function __construct($id, $id_cliente, $id_secretario, $data_hora) {
-        $this->id = $id;
+    function __construct($id_cliente, $id_secretario, $data_hora, $atendido) {
         $this->id_cliente = $id_cliente;
         $this->id_secretario = $id_secretario;
         $this->data_hora = $data_hora;
+        $this->atendido = $atendido;
+    }
+
+    function getId() {
+        return $this->id;
+    }
+
+    function getAtendido() {
+        return $this->atendido;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function setAtendido($atendido) {
+        $this->atendido = $atendido;
     }
 
     function getId_cliente() {

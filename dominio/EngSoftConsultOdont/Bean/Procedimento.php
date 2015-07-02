@@ -18,8 +18,7 @@ class Procedimento {
     private $descricao;
     private $preco;
 
-    function __construct($id, $nome, $descricao, $preco) {
-        $this->id = $id;
+    function __construct($nome, $descricao, $preco) {
         $this->nome = $nome;
         $this->descricao = $descricao;
         $this->preco = $preco;
@@ -31,6 +30,14 @@ class Procedimento {
 
     function getDescricao() {
         return $this->descricao;
+    }
+
+    function getId() {
+        return $this->id;
+    }
+
+    function setId($id) {
+        $this->id = $id;
     }
 
     function getPreco() {

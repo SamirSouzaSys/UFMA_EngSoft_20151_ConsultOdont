@@ -28,6 +28,30 @@ class Atendimento {
         $this->id_planoTratProc = $id_planoTratProc;
     }
 
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function setId_cliente($id_cliente) {
+        $this->id_cliente = $id_cliente;
+    }
+
+    function setId_cirurgiao($id_cirurgiao) {
+        $this->id_cirurgiao = $id_cirurgiao;
+    }
+
+    function setId_secretario($id_secretario) {
+        $this->id_secretario = $id_secretario;
+    }
+
+    function setData_hora($data_hora) {
+        $this->data_hora = $data_hora;
+    }
+
+    function setId_planoTratProc($id_planoTratProc) {
+        $this->id_planoTratProc = $id_planoTratProc;
+    }
+
     function getId() {
         return $this->id;
     }
