@@ -5,11 +5,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace EngSoft_ConsultOdont\Bean;
+
 /**
  * Description of planoTratamentoProcedimentos
  *
- * @author Samir Souza <samir.guitar@gmail.com>
+ * @author Allane Régis <allaneregis@gmail.com> @author Elydillse Botelho <elydillse@hotmail.com> @author José Paulo <jose.paulo.95@hotmail.com> @author Samir Souza <samir.guitar@gmail.com>
  */
 class PlanoTratamentoProcedimentos {
 
@@ -26,6 +26,10 @@ class PlanoTratamentoProcedimentos {
 
     function getId() {
         return $this->id;
+    }
+
+    function setId($id) {
+        $this->id = $id;
     }
 
     function getId_cirurgiao() {
@@ -52,6 +56,4 @@ class PlanoTratamentoProcedimentos {
         $this->qtdAtendimento = $qtdAtendimento;
     }
 
-
-    
 }

@@ -9,7 +9,7 @@
 /**
  * Description of GenericDAO
  *
- * @author Samir Souza <samir.guitar@gmail.com>
+ * @author Allane Régis <allaneregis@gmail.com> @author Elydillse Botelho <elydillse@hotmail.com> @author José Paulo <jose.paulo.95@hotmail.com> @author Samir Souza <samir.guitar@gmail.com>
  */
 abstract class GenericDAO {
 
@@ -68,7 +68,8 @@ abstract class GenericDAO {
 //            }
         } catch (PDOException $exc) {
             $objConexao->fecharConexaoDb(null, $this->conexaoPDO);
-            throw new PDOException("Ocorreu um erro ao gerar o LOG da Inscrição.");
+            echo $exc->getMessage() . ' _ ' . $exc->getFile();
+            throw new PDOException();
         }
 
         $objConexao->fecharConexaoDb(null, $this->conexaoPDO);

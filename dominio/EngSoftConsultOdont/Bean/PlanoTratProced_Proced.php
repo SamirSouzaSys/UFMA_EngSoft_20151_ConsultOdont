@@ -6,12 +6,10 @@
  * and open the template in the editor.
  */
 
-namespace EngSoft_ConsultOdont\Bean;
-
 /**
  * Description of planoTratProced_Proced
  *
- * @author Samir Souza <samir.guitar@gmail.com>
+ * @author Allane Régis <allaneregis@gmail.com> @author Elydillse Botelho <elydillse@hotmail.com> @author José Paulo <jose.paulo.95@hotmail.com> @author Samir Souza <samir.guitar@gmail.com>
  */
 class PlanoTratProced_Proced {
 
@@ -22,6 +20,14 @@ class PlanoTratProced_Proced {
     function __construct($planoTratamentoProcedimentos_id, $procedimento_id) {
         $this->planoTratamentoProcedimentos_id = $planoTratamentoProcedimentos_id;
         $this->procedimento_id = $procedimento_id;
+    }
+
+    function getId() {
+        return $this->id;
+    }
+
+    function setId($id) {
+        $this->id = $id;
     }
 
     function getPlanoTratamentoProcedimentos_id() {
@@ -40,6 +46,4 @@ class PlanoTratProced_Proced {
         $this->procedimento_id = $procedimento_id;
     }
 
-
-    
 }

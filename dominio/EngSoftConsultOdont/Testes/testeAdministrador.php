@@ -5,6 +5,8 @@ require_once '../Infradatabase/GerenciadorConexao.php';
 require_once '../DAO/AdministradorDAO.php';
 //criar um administrador
 
+echo "\n\nTESTE ADMINISTRADOR INICIADO!!\n\n";
+
 $secreObj = new Administrador('nome 1', 00011122233, "2000-12-13", "enderco exemplo", 988777766, 123456789, 123456);
 
 //criar o Gerenciador de Conexao
@@ -37,3 +39,5 @@ var_dump($secreDao->DAOInsert($secreObj, $gerenConex)); //4
 
 echo "Teste selectAll";
 var_dump($secreDao->DAOSelectAll($gerenConex));
+
+echo "\n\nTESTE ADMINISTRADOR FINALIZADO!!\n\n";

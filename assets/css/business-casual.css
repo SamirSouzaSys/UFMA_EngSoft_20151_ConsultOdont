@@ -6,11 +6,14 @@
 
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: url('../img/bg.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
+    background-image: url('../img/bg.jpg');
+/*    -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
-    -o-background-size: cover;
+    -o-background-size: cover;*/
+    background-repeat:repeat;
+    background-size: 25px 50px;
+
 }
 
 h1,
@@ -105,11 +108,12 @@ hr {
 footer {
     background: #fff;
     background: rgba(255,255,255,0.9);
+    height: 80px;
 }
 
 footer p {
     margin: 0;
-    padding: 50px 0;
+    padding: 10px 0;
 }
 
 @media screen and (min-width:768px) {
@@ -123,7 +127,7 @@ footer p {
         font-size: 5em;
         font-weight: 700;
         line-height: normal;
-        color: #fff;
+        color: #23527c;
     }
 
     .top-divider {
@@ -138,14 +142,14 @@ footer p {
     .address-bar {
         display: inherit;
         margin: 0;
-        padding: 0 0 40px;
+        /*padding: 0 0 0px;*/
         text-align: center;
         text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         text-transform: uppercase;
         font-size: 1.25em;
         font-weight: 400;
         letter-spacing: 3px;
-        color: #fff;
+        color: #23527c;
     }
 
     .navbar {

@@ -5,6 +5,8 @@ require_once '../Infradatabase/GerenciadorConexao.php';
 require_once '../DAO/SecretarioDAO.php';
 //criar um secretario
 
+echo "\n\nTESTE SECRETARIO INICIADO!!\n\n";
+
 $secreObj = new Secretario('nome 1', 00011122233, "2000-12-13", "enderco exemplo", 988777766, 123456789, 123456);
 
 //criar o Gerenciador de Conexao
@@ -30,9 +32,12 @@ $secreDao->setArrayTableColumns($secretarioArrayColumns);
 
 //Teste de inserçao
 $secreDao->DAOInsert($secreObj, $gerenConex); //1
-$secreDao->DAOInsert($secreObj, $gerenConex); //1
 $secreDao->DAOInsert($secreObj, $gerenConex); //2
 $secreDao->DAOInsert($secreObj, $gerenConex); //3
+$secreDao->DAOInsert($secreObj, $gerenConex); //4
 
 //Teste selectAll
+//var_dump - discrimina a variável
 var_dump($secreDao->DAOSelectAll($gerenConex));
+
+echo "\n\nTESTE SECRETARIO FINALIZADO!!\n\n";

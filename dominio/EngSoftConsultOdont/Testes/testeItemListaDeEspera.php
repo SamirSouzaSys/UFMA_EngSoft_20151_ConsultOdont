@@ -5,6 +5,8 @@ require_once '../Infradatabase/GerenciadorConexao.php';
 require_once '../DAO/ItemListaDeEsperaDAO.php';
 //criar um itemListaDeEspera
 
+echo "\n\nTESTE LISTA_DE_ESPERA INICIADO!!\n\n";
+
 $itemListaDeEsperaObj1 = new ItemListaDeEspera(1, 1, "2000-12-13 00:01:00", false);
 $itemListaDeEsperaObj2 = new ItemListaDeEspera(1, 1, "2000-12-13 00:02:00", false);
 $itemListaDeEsperaObj3 = new ItemListaDeEspera(1, 1, "2000-12-13 00:03:00", false);
@@ -34,3 +36,5 @@ $itemListaDeEsperaDao->DAOInsert($itemListaDeEsperaObj3, $gerenConex); //2
 $itemListaDeEsperaDao->DAOInsert($itemListaDeEsperaObj4, $gerenConex); //3
 //Teste selectAll
 var_dump($itemListaDeEsperaDao->DAOSelectAll($gerenConex));
+
+echo "\n\nTESTE LISTA_DE_ESPERA FINALIZADO!!\n\n";

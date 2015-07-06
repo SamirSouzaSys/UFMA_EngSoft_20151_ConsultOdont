@@ -11,7 +11,7 @@ require_once '../Bean/Secretario.php';
 /**
  * Description of SecretarioDAO
  *
- * @author Samir Souza <samir.guitar@gmail.com>
+ * @author Allane Régis <allaneregis@gmail.com> @author Elydillse Botelho <elydillse@hotmail.com> @author José Paulo <jose.paulo.95@hotmail.com> @author Samir Souza <samir.guitar@gmail.com>
  */
 class SecretarioDAO extends GenericDAO {
 

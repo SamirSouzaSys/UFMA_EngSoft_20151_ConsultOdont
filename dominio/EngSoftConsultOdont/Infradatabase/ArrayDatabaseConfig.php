@@ -3,7 +3,7 @@
 /**
  * UNA-SUS/UFMA - InfraEstrutura
  * 
- * @author Samir Souza <samir.guitar@gmail.com>
+ * @author Allane Régis <allaneregis@gmail.com> @author Elydillse Botelho <elydillse@hotmail.com> @author José Paulo <jose.paulo.95@hotmail.com> @author Samir Souza <samir.guitar@gmail.com>
  * @copyright (C) 2015, CTI UNA-SUS/UFMA
  * @version 1.1
  * @link http://www.unasus.ufma.br/jornadatcc/provab2015/
