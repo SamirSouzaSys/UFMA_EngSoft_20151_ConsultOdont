@@ -1,31 +1,16 @@
 <?php
 
-require_once '../../../system.php';
-require_once './funcoesDiversas.php';
-require_once '../Infradatabase/GerenciadorConexao.php';
-require_once '../DAO/AdministradorDAO.php';
-require_once '../DAO/CirurgiaoDAO.php';
-require_once '../DAO/SecretarioDAO.php';
+require_once './EngSoftConsultOdont/infraGeral/funcoesDiversas.php';
+require_once './EngSoftConsultOdont/Infradatabase/GerenciadorConexao.php';
+require_once './EngSoftConsultOdont/DAO/CirurgiaoDAO.php';
+require_once './EngSoftConsultOdont/DAO/AdministradorDAO.php';
+require_once './EngSoftConsultOdont/DAO/SecretarioDAO.php';
 
-/**
-  UNA-SUS/UFMA - Jornada de TCC *
-  @copyright (c) 2014, UNA-SUS/UFMA
- * Regras de negocio para acesso ao sistema
- * Dependencias:
- *              constantes.php
- *              conecta_dbm.php
- * 
-  @author Dilson Jos� <dilsonjlrjr@gmail.com>
-  @category UNA-SUS/UFMA
-  @since Arquivo dispon�vel desde a vers�o 1.0
-  @version $1.1$
-  @link: http://sistemas.unasus.ufma.br/jornadatcc/jornadatcc_idoso/negocio/acesso.php
- */
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $matricula = test_input($_POST["inputMatricula"]);
     $senha = test_input($_POST["inputSenha"]);
 
-    //criar o Gerenciador de Conexao
+//criar o Gerenciador de Conexao
     $gerenConex = new GerenciadorConexao();
 
     validarAcesso($matricula, $senha, $gerenConex);
@@ -33,34 +18,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 function validarAcesso($matricula, $senha, $conexao) {
     if (empty($matricula) || empty($senha)) {
-        $_GET['msgErr'] = 'Usuário/Senha inválidos... Tente novamente';
-        header("location:" . $url_site);
+        header("location:" . $GLOBALS['url_site'] . "/pages/login.php?msgErr=Insira o Usuário/Senha. Tente novamente");
     } else {
-        //Retira as tags php e html da string.
+//Retira as tags php e html da string.
         strip_tags($matricula) && strip_tags($senha);
 
-        $usuarioEncontradoBool = false;
+        $usuarioEncontradoBoolBool = false;
         $funcionarioEncontrado = '';
+        $resultPesquisa = '';
         $tipoFuncionario = '';
         try {
-            //Pesquisa por tipos de usuários
-            //Administrador
+//Pesquisa por tipos de usuários
+//Administrador
             $administradorArrayColumns = array(
               "id" => ":idAdmin", "nome" => ":nomeAdmin", "cpf" => ":cpfAdmin",
               "dataNascimento" => ":dataNascAdmin", "endereco" => ":enderecoAdmin",
               "contato" => ":contatoAdmin", "matricula" => ":matriAdmin", "senha" => ":senhaAdmin",
             );
             $adminDao = new AdministradorDAO("administrador", $administradorArrayColumns, null);
-            $resultPesquisa = '';
+            $usuarioEncontradoBool = false;
             $resultPesquisa = $adminDao->DAOSelectAll($conexao);
             $funcionarioEncontrado = PesquisaFuncionario($matricula, $senha, $resultPesquisa);
             if ($funcionarioEncontrado != false) {
-                $usuarioEncontrado = true;
+                $usuarioEncontradoBool = true;
                 $tipoFuncionario = 'administrador';
             }
 
-            //Secretario
-            if ($usuarioEncontrado == false) {
+//Secretario
+            if ($usuarioEncontradoBool == false) {
                 $secretarioArrayColumns = array(
                   "id" => ":idSecret", "nome" => ":nomeSecret", "cpf" => ":cpfSecret",
                   "dataNascimento" => ":dataNascSecret", "endereco" => ":enderecoSecret",
@@ -71,13 +56,13 @@ function validarAcesso($matricula, $senha, $conexao) {
                 $resultPesquisa = $secretDao->DAOSelectAll($conexao);
                 $funcionarioEncontrado = PesquisaFuncionario($matricula, $senha, $resultPesquisa);
                 if ($funcionarioEncontrado != false) {
-                    $usuarioEncontrado = true;
+                    $usuarioEncontradoBool = true;
                     $tipoFuncionario = 'secretario';
                 }
             }
 
-            //Cirurgiao
-            if ($usuarioEncontrado == false) {
+//Cirurgiao
+            if ($usuarioEncontradoBool == false) {
                 $cirurgiaoArrayColumns = array(
                   "id" => ":idcirurgiao", "nome" => ":nomecirurgiao", "cpf" => ":cpfcirurgiao",
                   "dataNascimento" => ":dataNasccirurgiao", "endereco" => ":enderecocirurgiao",
@@ -89,26 +74,25 @@ function validarAcesso($matricula, $senha, $conexao) {
                 $resultPesquisa = $cirurDao->DAOSelectAll($conexao);
                 $funcionarioEncontrado = PesquisaFuncionario($matricula, $senha, $resultPesquisa);
                 if ($funcionarioEncontrado != false) {
-                    $usuarioEncontrado = true;
+                    $usuarioEncontradoBool = true;
                     $tipoFuncionario = 'cirurgiao';
                 }
             }
 
-            //Teste Final
-            if ($usuarioEncontrado == false) {
-                $_GET['msgErr'] = 'Usuário/Senha inválidos... Tente novamente';
-                header("location:" . $url_site);
+//Teste Final
+            if ($usuarioEncontradoBool == false) {
+                header("location:" . $GLOBALS['url_site'] . "/pages/login.php?msgErr=Usuário/Senha inválidos... Tente novamente");
             }
         } catch (Exception $exc) {
             throw new Exception("Houve um erro ao retornar dados de acesso do usu�rio.<br/>" . $exc->getMessage());
-            $_GET['msgErr'] = $exc->getMessage() . '... Tente novamente';
-            header("location:" . $url_site);
+            header("location:" . $GLOBALS['url_site'] . "/pages/login.php?msgErr=Erro: " . $exc->getMessage() . " Tente novamente");
         }
 
-        if ($funcionarioEncontrado != null) {
+        if ($funcionarioEncontrado != false) {
             session_start();
 
             $_SESSION['id'] = $funcionarioEncontrado->getId();
+            $_SESSION['nome'] = $funcionarioEncontrado->getNome();
             $_SESSION['cpf'] = $funcionarioEncontrado->getCpf();
             $_SESSION['dataNascimento'] = $funcionarioEncontrado->getDataNascimento();
             $_SESSION['endereco'] = $funcionarioEncontrado->getEndereco();
@@ -119,6 +103,7 @@ function validarAcesso($matricula, $senha, $conexao) {
             if ($_SESSION['tipo'] == 'cirurgiao') {
                 $_SESSION['cro'] = $funcionarioEncontrado->getCro();
             }
+            $_SESSION['logado'] = TRUE;
 
             return true;
         } else {
@@ -140,27 +125,27 @@ function PesquisaFuncionario($matriculaPesquisada, $senha, $resultPesquisaGeral)
 function logout() {
     session_start();
 
-    unset($_SESSION['autenticacao']);
     unset($_SESSION['id']);
-    unset($_SESSION['nome_jtcc1']);
-    unset($_SESSION['username_jtcc1']);
-    unset($_SESSION['password_jtcc1']);
-    unset($_SESSION['tipoparticipante_jtcc1']);
-    unset($_SESSION['tipoacesso_jtcc1']);
+    unset($_SESSION['nome']);
+    unset($_SESSION['cpf']);
+    unset($_SESSION['dataNascimento']);
+    unset($_SESSION['endereco']);
+    unset($_SESSION['contato']);
+    unset($_SESSION['matricula']);
+    unset($_SESSION['senha']);
+    unset($_SESSION['tipo']);
+    unset($_SESSION['cro']);
+    $_SESSION['logado'] = FALSE;
 }
 
-//verificar a validade da sess�o
+//verificar a validade da sessao
 function verificarSessao() {
     session_start();
-    if (!(isset($_SESSION['autenticacao']) && isset($_SESSION['id']) && isset($_SESSION['nome_jtcc1']) &&
-            isset($_SESSION['username_jtcc1']) && isset($_SESSION['password_jtcc1']) &&
-            isset($_SESSION['tipoparticipante_jtcc1']) && isset($_SESSION['tipoacesso_jtcc1']))
-    ) {
-        logout();
-        return FALSE;
+    if ($_SESSION['logado'] == true) {
+        return TRUE;
     }
-
-    return TRUE;
+    logout();
+    return FALSE;
 }
 
 ?>

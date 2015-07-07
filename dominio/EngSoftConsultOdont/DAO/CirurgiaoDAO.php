@@ -1,12 +1,7 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 require_once 'GenericDAO.php';
-require_once '../Bean/Cirurgiao.php';
+require_once '/Bean/Cirurgiao.php';
 
 /**
  * Description of CirurgiaoDAO
@@ -20,9 +15,6 @@ class CirurgiaoDAO extends GenericDAO {
     }
 
     function bindParamsObjInsert($stmt, $obj) {
-//    $stmt->bindParam(':moodle_id', $moodle_id, PDO::PARAM_INT);
-//    $stmt->bindParam(':operacao', $operacao, PDO::PARAM_STR);
-//    $handle->execute(array(":date"=>date("Y-m-d H:i:s", strtotime($date)), PDO::PARAM_STR));
         $stmt->bindParam(":nomecirurgiao", $obj->getNome(), PDO::PARAM_STR);
         $stmt->bindParam(":cpfcirurgiao", $obj->getCpf(), PDO::PARAM_INT);
         $stmt->bindParam(":dataNasccirurgiao", date("Y-m-d", strtotime($obj->getDataNascimento())), PDO::PARAM_STR);

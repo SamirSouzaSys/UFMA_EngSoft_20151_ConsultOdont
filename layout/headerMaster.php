@@ -16,21 +16,16 @@
         <!-- Fonts -->
         <link href="<?= $url_site; ?>/assets/fonts/font1.css" rel="stylesheet" type="text/css">
         <link href="<?= $url_site; ?>/assets/fonts/font2.css" rel="stylesheet" type="text/css">
-
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
     </head>
 
     <body>
-
         <!--Collect the nav links, forms, and other content for toggling -->
-
-
         <div class="brand">Consultório Sorriso Feliz</div>
         <div class="address-bar">Logo ali no CCET da UFMA</div>
 
@@ -63,9 +58,23 @@
             <!--/.container -->
         </nav>
         <?php
+        if (isset($_SESSION['logado'])) {
+            ?>
+            <div class="alert alert-info text-right">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&nbsp;Sair</button>
+                <label>
+                    <?php
+                    echo " Seja bem vindo - " . $_SESSION['nome'] . " - Cargo: " . $_SESSION['tipo'] . " ";
+                    ?>        
+                </label>
+            </div>    
+            <?php
+        }
+        ?>
+        <?php
         if (isset($_GET['msgErr'])) {
             ?>
-            <div class="alert alert-danger alert-dismissible">
+            <div class="alert alert-danger alert-dismissible text-center">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <?php
                 echo $_GET['msgErr'];

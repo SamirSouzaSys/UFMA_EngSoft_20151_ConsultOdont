@@ -10,7 +10,7 @@ require_once '../system.php';
             Login
         </div>
         <div class="panel-body">
-            <form action="<?= $url_site ?>/dominio/EngSoftConsultOdont/infraGeral/acesso.php" method="post">
+            <form action="<?= $url_site ?>/dominio/acesso.php" method="post">
                 <div class="row ">
                     <label>Matrícula</label>
                     <input name="inputMatricula" class="form-control" placeholder="Digite a sua MATRÍCULA aqui">
