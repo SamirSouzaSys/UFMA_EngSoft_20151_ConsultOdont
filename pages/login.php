@@ -18,7 +18,7 @@ require_once '../system.php';
                 </div>
                 <div class="row ">
                     <label>Senha</label>
-                    <input name="inputSenha" class="form-control" type="password" placeholder="Digite a sua senha aqui"/>
+                    <input name="inputSenha" class="form-control" type="password" placeholder="Digite a sua SENHA aqui"/>
 
                 </div>
                 <br>

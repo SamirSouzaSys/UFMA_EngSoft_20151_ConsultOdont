@@ -1,5 +1,6 @@
 <?php
 
+require_once '../../../system.php';
 require_once './funcoesDiversas.php';
 require_once '../Infradatabase/GerenciadorConexao.php';
 require_once '../DAO/AdministradorDAO.php';
@@ -32,7 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 function validarAcesso($matricula, $senha, $conexao) {
     if (empty($matricula) || empty($senha)) {
-        $_GET
+        $_GET['msgErr'] = 'Usuário/Senha inválidos... Tente novamente';
+        header("location:" . $url_site);
     } else {
         //Retira as tags php e html da string.
         strip_tags($matricula) && strip_tags($senha);
@@ -51,7 +53,7 @@ function validarAcesso($matricula, $senha, $conexao) {
             $adminDao = new AdministradorDAO("administrador", $administradorArrayColumns, null);
             $resultPesquisa = '';
             $resultPesquisa = $adminDao->DAOSelectAll($conexao);
-            $funcionarioEncontrado = PesquisaFuncionario($matricula, $resultPesquisa);
+            $funcionarioEncontrado = PesquisaFuncionario($matricula, $senha, $resultPesquisa);
             if ($funcionarioEncontrado != false) {
                 $usuarioEncontrado = true;
                 $tipoFuncionario = 'administrador';
@@ -67,7 +69,7 @@ function validarAcesso($matricula, $senha, $conexao) {
                 $secretDao = new SecretarioDAO("secretario", $secretarioArrayColumns, null);
                 $resultPesquisa = '';
                 $resultPesquisa = $secretDao->DAOSelectAll($conexao);
-                $funcionarioEncontrado = PesquisaFuncionario($matricula, $resultPesquisa);
+                $funcionarioEncontrado = PesquisaFuncionario($matricula, $senha, $resultPesquisa);
                 if ($funcionarioEncontrado != false) {
                     $usuarioEncontrado = true;
                     $tipoFuncionario = 'secretario';
@@ -85,7 +87,7 @@ function validarAcesso($matricula, $senha, $conexao) {
                 $cirurDao = new CirurgiaoDAO("secretario", $cirurgiaoArrayColumns, null);
                 $resultPesquisa = '';
                 $resultPesquisa = $cirurDao->DAOSelectAll($conexao);
-                $funcionarioEncontrado = PesquisaFuncionario($matricula, $resultPesquisa);
+                $funcionarioEncontrado = PesquisaFuncionario($matricula, $senha, $resultPesquisa);
                 if ($funcionarioEncontrado != false) {
                     $usuarioEncontrado = true;
                     $tipoFuncionario = 'cirurgiao';
@@ -94,10 +96,13 @@ function validarAcesso($matricula, $senha, $conexao) {
 
             //Teste Final
             if ($usuarioEncontrado == false) {
-                return 'Usuario NAO encontrado';
+                $_GET['msgErr'] = 'Usuário/Senha inválidos... Tente novamente';
+                header("location:" . $url_site);
             }
         } catch (Exception $exc) {
             throw new Exception("Houve um erro ao retornar dados de acesso do usu�rio.<br/>" . $exc->getMessage());
+            $_GET['msgErr'] = $exc->getMessage() . '... Tente novamente';
+            header("location:" . $url_site);
         }
 
         if ($funcionarioEncontrado != null) {
@@ -117,15 +122,15 @@ function validarAcesso($matricula, $senha, $conexao) {
 
             return true;
         } else {
-            
+
             return false;
         }
     }
 }
 
-function PesquisaFuncionario($matriculaPesquisada, $resultPesquisaGeral) {
+function PesquisaFuncionario($matriculaPesquisada, $senha, $resultPesquisaGeral) {
     foreach ($resultPesquisaGeral as $funcionario) {
-        if ($funcionario->getMatricula() == $matriculaPesquisada) {
+        if ($funcionario->getMatricula() == $matriculaPesquisada && $funcionario->getSenha() == $senha) {
             return $funcionario;
         }
     }
