@@ -23,7 +23,7 @@ class ArrayDatabaseConfig {
     public static function obterDatabaseConfig($databaseConfig) {
         $databaseConfig['teste']['hostname'] = 'localhost'; //'bdsites.ufma.br';
         $databaseConfig['teste']['username'] = 'root';
-        $databaseConfig['teste']['password'] = 'root';
+        $databaseConfig['teste']['password'] = '';
         $databaseConfig['teste']['database'] = 'consultOdontEngSoft';
         $databaseConfig['teste']['dbdriver'] = '';
         $databaseConfig['teste']['charset'] = '';

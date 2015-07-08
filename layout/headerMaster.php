@@ -58,7 +58,9 @@
             <!--/.container -->
         </nav>
         <?php
-        if (isset($_SESSION['logado'])) {
+        session_start();
+
+        if ($_SESSION['logado']) {
             ?>
             <div class="alert alert-info text-right">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&nbsp;Sair</button>

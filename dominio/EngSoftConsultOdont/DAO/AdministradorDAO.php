@@ -1,7 +1,7 @@
 <?php
 
 require_once 'GenericDAO.php';
-require_once '../Bean/Administrador.php';
+require_once __DIR__.'/../Bean/Administrador.php';
 
 /**
  * Description of AdministradorDAO

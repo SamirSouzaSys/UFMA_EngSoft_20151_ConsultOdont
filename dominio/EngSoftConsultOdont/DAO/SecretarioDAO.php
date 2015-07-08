@@ -1,7 +1,7 @@
 <?php
 
 require_once 'GenericDAO.php';
-require_once '../Bean/Secretario.php';
+require_once __DIR__.'/../Bean/Secretario.php';
 
 /**
  * Description of SecretarioDAO

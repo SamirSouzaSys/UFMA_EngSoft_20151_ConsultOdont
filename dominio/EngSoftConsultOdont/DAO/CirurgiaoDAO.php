@@ -1,7 +1,7 @@
 <?php
 
 require_once 'GenericDAO.php';
-require_once '/Bean/Cirurgiao.php';
+require_once __DIR__.'/../Bean/Cirurgiao.php';
 
 /**
  * Description of CirurgiaoDAO

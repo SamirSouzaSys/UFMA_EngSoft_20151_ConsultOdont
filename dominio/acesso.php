@@ -2,9 +2,9 @@
 
 require_once './EngSoftConsultOdont/infraGeral/funcoesDiversas.php';
 require_once './EngSoftConsultOdont/Infradatabase/GerenciadorConexao.php';
-require_once './EngSoftConsultOdont/DAO/CirurgiaoDAO.php';
-require_once './EngSoftConsultOdont/DAO/AdministradorDAO.php';
-require_once './EngSoftConsultOdont/DAO/SecretarioDAO.php';
+require_once __DIR__.'./EngSoftConsultOdont/DAO/CirurgiaoDAO.php';
+require_once __DIR__.'./EngSoftConsultOdont/DAO/AdministradorDAO.php';
+require_once __DIR__.'./EngSoftConsultOdont/DAO/SecretarioDAO.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $matricula = test_input($_POST["inputMatricula"]);
@@ -13,12 +13,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //criar o Gerenciador de Conexao
     $gerenConex = new GerenciadorConexao();
 
-    validarAcesso($matricula, $senha, $gerenConex);
+    if(validarAcesso($matricula, $senha, $gerenConex)){
+        header("location:" . $GLOBALS['url_site'] . "/engsoft/index.php");
+    };
 }
 
 function validarAcesso($matricula, $senha, $conexao) {
     if (empty($matricula) || empty($senha)) {
-        header("location:" . $GLOBALS['url_site'] . "/pages/login.php?msgErr=Insira o Usuário/Senha. Tente novamente");
+        header("location:" . $GLOBALS['url_site'] . "/engsoft/pages/login.php?msgErr=Insira o Usuário/Senha. Tente novamente");
     } else {
 //Retira as tags php e html da string.
         strip_tags($matricula) && strip_tags($senha);
@@ -81,11 +83,11 @@ function validarAcesso($matricula, $senha, $conexao) {
 
 //Teste Final
             if ($usuarioEncontradoBool == false) {
-                header("location:" . $GLOBALS['url_site'] . "/pages/login.php?msgErr=Usuário/Senha inválidos... Tente novamente");
+                header("location:" . $GLOBALS['url_site'] . "/engsoft/pages/login.php?msgErr=Usuário/Senha inválidos... Tente novamente");
             }
         } catch (Exception $exc) {
-            throw new Exception("Houve um erro ao retornar dados de acesso do usu�rio.<br/>" . $exc->getMessage());
-            header("location:" . $GLOBALS['url_site'] . "/pages/login.php?msgErr=Erro: " . $exc->getMessage() . " Tente novamente");
+            /*throw new Exception("Houve um erro ao retornar dados de acesso do usu�rio.<br/>" . $exc->getMessage());*/
+            header("location:" . $GLOBALS['url_site'] . "/engsoft/pages/login.php?msgErr=Erro: " . $exc->getMessage() . " Tente novamente");
         }
 
         if ($funcionarioEncontrado != false) {
@@ -107,7 +109,6 @@ function validarAcesso($matricula, $senha, $conexao) {
 
             return true;
         } else {
-
             return false;
         }
     }
