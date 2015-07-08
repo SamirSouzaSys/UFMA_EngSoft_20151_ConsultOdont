@@ -20,9 +20,9 @@ require_once '../system.php';
         <li>
             <a href="<?=$url_site?>/pages/cadastrarProcedimento.php">Cadastrar Procedimento</a>
         </li>
-        <li>
+        <!-- <li>
             <a href="<?=$url_site?>/pages/cadastrarProcedimento.php">Cadastrar Cliente na lista de Espera</a>
-        </li>
+        </li> -->
     </ul>
 </div>
 <?php

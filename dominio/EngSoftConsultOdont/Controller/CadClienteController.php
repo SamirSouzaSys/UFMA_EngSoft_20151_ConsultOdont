@@ -31,3 +31,5 @@ $clienteArrayColumns = array(
 $clienteDao = new ClienteDAO("cliente", $clienteArrayColumns, null);
 
 $inserido = $clienteDao->DAOInsert($clienteObj, $gerenConex);
+
+header("location:" . $GLOBALS['url_site'] . "/engsoftconsultodont/pages/cadastrarCliente.php?msgErr=Cliente cadastrado com sucesso!");

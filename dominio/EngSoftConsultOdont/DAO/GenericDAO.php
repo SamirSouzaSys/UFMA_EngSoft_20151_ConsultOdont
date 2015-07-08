@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Description of GenericDAO
  *
@@ -119,8 +117,57 @@ abstract class GenericDAO {
         }
     }
 
-    function DAOSelectColumn($itemColumn, GerenciadorConexao $conexao) {
-        $a;
+    function DAOSelectColumn($itemColumn, GerenciadorConexao $objConexao) {
+        if (!isset($itemColumn)) {
+            return false;
+        }
+
+        try {
+            $this->conexaoPDO = $objConexao->abrirConexaoDb('teste');
+        } catch (PDOException $exc) {
+            throw new PDOException($exc->getMessage());
+        }
+
+        //LIsta de colunas da tabela que serão afetadas pela query
+        $colunas = '';
+        foreach ($this->arrayTableColumns as $key => $val) {
+            if ($key != 'id') {
+                if ($colunas != '') {
+                    $colunas = $colunas . ', ' . $key;
+                } else {//sendo o primeiro elemento
+                    $colunas = $key;
+                }
+            }
+        }
+        
+        //executa inserçãoPDO
+        $query = "select * from " . $this->tableName . " where " . $colunas . " = :data limit 1";
+
+        try {
+            $stmt = new PDOStatement;
+            $stmt = $this->conexaoPDO->prepare($query);
+
+            $stmt->bindParam(':data', $itemColumn, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            $arrayObjects = array();
+
+            $arrayOriginal = $stmt->fetchALL(PDO::FETCH_ASSOC);
+
+            //monta os objetos
+            $this->montaArrayObjetos($arrayOriginal, $arrayObjects);
+            
+        } catch (PDOException $exc) {
+            $objConexao->fecharConexaoDb(null, $this->conexaoPDO);
+            echo $exc->getMessage() . ' _ ' . $exc->getFile();
+            throw new PDOException();
+        }
+
+        $objConexao->fecharConexaoDb(null, $this->conexaoPDO);
+
+        //retornar array de objeto(s)
+        return $arrayObjects;
     }
 
     function DAODelete($item, GerenciadorConexao $conexao) {

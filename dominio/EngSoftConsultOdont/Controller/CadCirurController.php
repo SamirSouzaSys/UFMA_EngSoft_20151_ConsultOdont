@@ -34,3 +34,5 @@ $cirurArrayColumns = array(
 $cirurDao = new CirurgiaoDAO("cirurgiao", $cirurArrayColumns, null);
 
 $inserido = $cirurDao->DAOInsert($cirurObj, $gerenConex);
+
+header("location:" . $GLOBALS['url_site'] . "/engsoftconsultodont/pages/cadastrarCirurgiao.php?msgErr=Cirurgiao cadastrado com sucesso!");

@@ -28,3 +28,5 @@ $procedimentoArrayColumns = array(
 $procedimentoDao = new ProcedimentoDAO("procedimento", $procedimentoArrayColumns, null);
 
 $inserido = $procedimentoDao->DAOInsert($procedimentoObj, $gerenConex);
+
+header("location:" . $GLOBALS['url_site'] . "/engsoftconsultodont/pages/cadastrarProcedimento.php?msgErr=Procedimento cadastrado com sucesso!");

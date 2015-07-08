@@ -1,10 +1,13 @@
 <?php
 
-require_once './EngSoftConsultOdont/infraGeral/funcoesDiversas.php';
-require_once './EngSoftConsultOdont/Infradatabase/GerenciadorConexao.php';
-require_once __DIR__.'./EngSoftConsultOdont/DAO/CirurgiaoDAO.php';
-require_once __DIR__.'./EngSoftConsultOdont/DAO/AdministradorDAO.php';
-require_once __DIR__.'./EngSoftConsultOdont/DAO/SecretarioDAO.php';
+require_once __DIR__ . '/EngSoftConsultOdont/infraGeral/funcoesDiversas.php';
+require_once __DIR__ . '/EngSoftConsultOdont/Infradatabase/GerenciadorConexao.php';
+require_once __DIR__ . '/EngSoftConsultOdont/DAO/CirurgiaoDAO.php';
+require_once __DIR__ . '/EngSoftConsultOdont/DAO/AdministradorDAO.php';
+require_once __DIR__ . '/EngSoftConsultOdont/DAO/SecretarioDAO.php';
+
+//echo __DIR__ ;
+//die();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $matricula = test_input($_POST["inputMatricula"]);
@@ -13,14 +16,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //criar o Gerenciador de Conexao
     $gerenConex = new GerenciadorConexao();
 
-    if(validarAcesso($matricula, $senha, $gerenConex)){
-        header("location:" . $GLOBALS['url_site'] . "/engsoft/index.php");
+    if (validarAcesso($matricula, $senha, $gerenConex)) {
+        header("location:" . $GLOBALS['url_site'] . "/engsoftconsultodont/index.php");
     };
+}
+
+if (isset($_GET['acao'])) {
+    logout();
 }
 
 function validarAcesso($matricula, $senha, $conexao) {
     if (empty($matricula) || empty($senha)) {
-        header("location:" . $GLOBALS['url_site'] . "/engsoft/pages/login.php?msgErr=Insira o Usuário/Senha. Tente novamente");
+        header("location:" . $GLOBALS['url_site'] . "/engsoftconsultodont/pages/login.php?msgErr=Insira o Usuário/Senha. Tente novamente");
     } else {
 //Retira as tags php e html da string.
         strip_tags($matricula) && strip_tags($senha);
@@ -83,11 +90,11 @@ function validarAcesso($matricula, $senha, $conexao) {
 
 //Teste Final
             if ($usuarioEncontradoBool == false) {
-                header("location:" . $GLOBALS['url_site'] . "/engsoft/pages/login.php?msgErr=Usuário/Senha inválidos... Tente novamente");
+                header("location:" . $GLOBALS['url_site'] . "/engsoftconsultodont/pages/login.php?msgErr=Usuário/Senha inválidos... Tente novamente");
             }
         } catch (Exception $exc) {
-            /*throw new Exception("Houve um erro ao retornar dados de acesso do usu�rio.<br/>" . $exc->getMessage());*/
-            header("location:" . $GLOBALS['url_site'] . "/engsoft/pages/login.php?msgErr=Erro: " . $exc->getMessage() . " Tente novamente");
+            /* throw new Exception("Houve um erro ao retornar dados de acesso do usu�rio.<br/>" . $exc->getMessage()); */
+            header("location:" . $GLOBALS['url_site'] . "/engsoftconsultodont/pages/login.php?msgErr=Erro: " . $exc->getMessage() . " Tente novamente");
         }
 
         if ($funcionarioEncontrado != false) {
@@ -124,29 +131,34 @@ function PesquisaFuncionario($matriculaPesquisada, $senha, $resultPesquisaGeral)
 }
 
 function logout() {
-    session_start();
-
-    unset($_SESSION['id']);
-    unset($_SESSION['nome']);
-    unset($_SESSION['cpf']);
-    unset($_SESSION['dataNascimento']);
-    unset($_SESSION['endereco']);
-    unset($_SESSION['contato']);
-    unset($_SESSION['matricula']);
-    unset($_SESSION['senha']);
-    unset($_SESSION['tipo']);
-    unset($_SESSION['cro']);
-    $_SESSION['logado'] = FALSE;
+    if (verificarSessao()) {
+        unset($_SESSION['id']);
+        unset($_SESSION['nome']);
+        unset($_SESSION['cpf']);
+        unset($_SESSION['dataNascimento']);
+        unset($_SESSION['endereco']);
+        unset($_SESSION['contato']);
+        unset($_SESSION['matricula']);
+        unset($_SESSION['senha']);
+        unset($_SESSION['tipo']);
+        unset($_SESSION['cro']);
+        $_SESSION['logado'] = FALSE;
+    } else {
+        $_SESSION['logado'] = FALSE;
+    }
+    header("location:" . $GLOBALS['url_site'] . "/engsoftconsultodont/index.php");
 }
 
 //verificar a validade da sessao
 function verificarSessao() {
-    session_start();
-    if ($_SESSION['logado'] == true) {
-        return TRUE;
+    if (!isset($_SESSION)) {
+        session_start();
     }
-    logout();
-    return FALSE;
-}
 
+    if (isset($_SESSION['logado']) && $_SESSION['logado'] == true) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
 ?>

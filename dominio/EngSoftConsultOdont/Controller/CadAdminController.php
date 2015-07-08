@@ -34,3 +34,5 @@ $adminArrayColumns = array(
 $adminDao = new AdministradorDAO("administrador", $adminArrayColumns, null);
 
 $inserido = $adminDao->DAOInsert($adminObj, $gerenConex);
+
+header("location:" . $GLOBALS['url_site'] . "/engsoftconsultodont/pages/cadastrarAdmin.php?msgErr=Administrador cadastrado com sucesso!");

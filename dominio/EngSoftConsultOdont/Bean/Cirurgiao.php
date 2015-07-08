@@ -1,6 +1,6 @@
 <?php
 
-require_once '/Funcionario.php';
+require_once 'Funcionario.php';
 
 /**
  * Description of Cirurgiao

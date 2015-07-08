@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__.'/../dominio/acesso.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -51,6 +55,9 @@
                         <li>
                             <a href = "<?= $url_site; ?>/pages/cadastrarAll.php">Cadastrar</a>
                         </li>
+                        <li>
+                            <a href = "<?= $url_site; ?>/pages/pesquisarAll.php">Pesquisar</a>
+                        </li>
                     </ul>
                 </div>
                 <!--/.navbar-collapse -->
@@ -58,15 +65,14 @@
             <!--/.container -->
         </nav>
         <?php
-        session_start();
-
-        if ($_SESSION['logado']) {
+        if (verificarSessao()) {
             ?>
             <div class="alert alert-info text-right">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&nbsp;Sair</button>
+                <!--<button type="submit" class="close" data-dismiss="alert" aria-hidden="true">&nbsp;Sair</button>-->
+                <a href="<?= $url_site; ?>/dominio/acesso.php?acao=logout" class="close" data-dismiss="alert" aria-hidden="true">&nbsp;&nbsp;&nbsp;Sair</a>
                 <label>
                     <?php
-                    echo " Seja bem vindo - " . $_SESSION['nome'] . " - Cargo: " . $_SESSION['tipo'] . " ";
+                    echo " Seja bem vindo " . $_SESSION['nome'] . " - Cargo: " . $_SESSION['tipo'] . " ";
                     ?>        
                 </label>
             </div>    
